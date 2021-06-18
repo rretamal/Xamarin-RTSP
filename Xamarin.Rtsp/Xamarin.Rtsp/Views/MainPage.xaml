@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Ctrls="clr-namespace:Xamarin.Rtsp.Renderers"
+             x:Class="Xamarin.Rtsp.MainPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar Cámara" Clicked="New_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="5" CornerRadius="0">
+            <Label Text="RTSP Demo" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Ctrls:CameraView x:Name="cameraView" BackgroundColor="LightGray" MinimumHeightRequest="100" MinimumWidthRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Ctrls:CameraView>
+    </StackLayout>
+
+</ContentPage>

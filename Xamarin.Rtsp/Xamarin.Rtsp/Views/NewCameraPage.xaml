@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xamarin.Rtsp.Views.NewCameraPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Guardar" Clicked="Save_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <TableView Intent="Form">
+            <TableView.Root>
+                <TableSection>
+                    <EntryCell x:Name="cameraUrl" Label="URL:" />
+                    <EntryCell x:Name="cameraPort" Label="Puerto:" Keyboard="Numeric" />
+                    <EntryCell x:Name="cameraUser" Label="User:"/>
+                    <EntryCell x:Name="cameraPassword" Label="Password:"/>
+                    <SwitchCell x:Name="cameraVideo" Text="Habilitar Video" On="True" />
+                    <SwitchCell x:Name="cameraAudio" Text="Habilitar Audio" />
+                </TableSection>
+            </TableView.Root>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>
