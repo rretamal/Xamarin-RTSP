@@ -35,8 +35,13 @@ namespace Xamarin.Rtsp
                 var cameraVideo = Preferences.Get("cameraVideo", "");
                 var cameraAudio = Preferences.Get("cameraAudio", "");
 
-                rtspClient.StartStreaming();
+                
             }
+
+            var t = Task.Run(() => {
+                rtspClient.StartStreaming();
+            });
+            
         }
 
         void New_Clicked(object sender, EventArgs e)

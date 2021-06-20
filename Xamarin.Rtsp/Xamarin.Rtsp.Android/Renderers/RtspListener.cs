@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Xamarin.Rtsp.Droid.Renderers.Decode;
 
 namespace Xamarin.Rtsp.Droid.Renderers
 {
@@ -23,6 +24,8 @@ namespace Xamarin.Rtsp.Droid.Renderers
         private int audioSampleRate = 0;
         private int audioChannelCount = 0;
         private byte[] audioCodecConfig = null;
+        VideoDecodeThread videoDecodeThread;
+
         //public IntPtr Handle => throw new NotImplementedException();
 
         //public int JniIdentityHashCode => throw new NotImplementedException();
@@ -69,12 +72,15 @@ namespace Xamarin.Rtsp.Droid.Renderers
                         videoMimeType = "video/hevc";
                         break;
                 }
-                
-                switch (sdpInfo.AudioTrack.AudioCodec)
+
+                if (sdpInfo.AudioTrack != null)
                 {
-                    case Com.Alexvas.Rtsp.RtspClient.AudioCodecAac:
-                        audioMimeType = "audio/mp4a-latm";
-                        break;
+                    switch (sdpInfo.AudioTrack.AudioCodec)
+                    {
+                        case Com.Alexvas.Rtsp.RtspClient.AudioCodecAac:
+                            audioMimeType = "audio/mp4a-latm";
+                            break;
+                    }
                 }
             }
 
@@ -85,7 +91,7 @@ namespace Xamarin.Rtsp.Droid.Renderers
             {
                 var data = new byte[sps.Count + pps.Count];
                 sps.CopyTo(data, 0);
-                pps.CopyTo(data, sps.Count + 1);
+                pps.CopyTo(data, sps.Count);
 
                 videoFrameQueue.Push(new Frame
                 {
@@ -116,7 +122,12 @@ namespace Xamarin.Rtsp.Droid.Renderers
         }
 
         public void onRtspClientConnected()
-        { }
+        {
+            if (!string.IsNullOrWhiteSpace(videoMimeType))
+            {
+                //videoDecodeThread = new VideoDecodeThread();
+            }
+        }
     
         public void OnRtspConnecting()
         {
