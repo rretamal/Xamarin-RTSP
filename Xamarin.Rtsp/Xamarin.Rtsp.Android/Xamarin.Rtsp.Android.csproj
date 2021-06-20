@@ -60,7 +60,9 @@
   <ItemGroup>
     <Compile Include="Core\NetUtils.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\FrameQueue.cs" />
     <Compile Include="Renderers\RtspClient.cs" />
+    <Compile Include="Renderers\RtspListener.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
