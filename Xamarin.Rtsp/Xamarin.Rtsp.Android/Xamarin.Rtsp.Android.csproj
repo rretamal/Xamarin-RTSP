@@ -60,6 +60,8 @@
   <ItemGroup>
     <Compile Include="Core\NetUtils.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\CameraViewRenderer.cs" />
+    <Compile Include="Renderers\CustomRenderer .cs" />
     <Compile Include="Renderers\Decode\FrameQueue.cs" />
     <Compile Include="Renderers\Decode\VideoDecodeThread.cs" />
     <Compile Include="Renderers\RtspClient.cs" />

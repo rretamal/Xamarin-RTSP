@@ -25,7 +25,12 @@ namespace Xamarin.Rtsp.Droid.Renderers
         private int audioChannelCount = 0;
         private byte[] audioCodecConfig = null;
         VideoDecodeThread videoDecodeThread;
+        Surface _surface;
 
+        public RtspListener()
+        {
+            //_surface = surface;
+        }
         //public IntPtr Handle => throw new NotImplementedException();
 
         //public int JniIdentityHashCode => throw new NotImplementedException();
@@ -125,7 +130,7 @@ namespace Xamarin.Rtsp.Droid.Renderers
         {
             if (!string.IsNullOrWhiteSpace(videoMimeType))
             {
-                //videoDecodeThread = new VideoDecodeThread();
+                //videoDecodeThread = new VideoDecodeThread(_surface, videoMimeType, _);
             }
         }
     

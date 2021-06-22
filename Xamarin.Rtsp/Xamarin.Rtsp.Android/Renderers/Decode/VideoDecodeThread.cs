@@ -68,19 +68,19 @@ namespace Xamarin.Rtsp.Droid.Renderers.Decode
                 {
                     var outIndex = decoder.DequeueOutputBuffer(bufferInfo, 10000);
 
-                    switch (outIndex)
-                    {
-                        case (int)MediaCodec.InfoOutputBuffersChanged:
-                            break;
-                        case (int)MediaCodec.InfoTryAgainLater:
-                            break;
-                        default:
-                            if (outIndex >= 0)
-                            {
-                                decoder.ReleaseOutputBuffer(outIndex, bufferInfo.Size != 0);
-                            }
-                            break;
-                    }
+                    //switch (outIndex)
+                    //{
+                    //    case (int)MediaCodec.InfoOutputBuffersChanged:
+                    //        break;
+                    //    case (int)MediaCodec.InfoTryAgainLater:
+                    //        break;
+                    //    default:
+                    //        if (outIndex >= 0)
+                    //        {
+                    //            decoder.ReleaseOutputBuffer(outIndex, bufferInfo.Size != 0);
+                    //        }
+                    //        break;
+                    //}
                 }
                 catch (Exception ex)
                 { 

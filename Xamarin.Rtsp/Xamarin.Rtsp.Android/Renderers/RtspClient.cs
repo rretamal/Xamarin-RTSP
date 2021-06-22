@@ -21,11 +21,14 @@ namespace Xamarin.Rtsp.Droid.Renderers
     public class RtspClient : IRtspClient
     {
         Com.Alexvas.Rtsp.RtspClient localClient;
+        ICustomView _surfaceView;
 
-        public async Task<bool> StartStreaming()
+        public async Task<bool> StartStreaming(ICustomView surfaceView)
         {
             try
             {
+                _surfaceView = surfaceView;
+
                 var socket = await NetUtils.CreateSocketAndConnect("192.168.1.51", 554, 5000);
                 string uri = "rtsp://192.168.1.51:554/11";
                 int port = 554;

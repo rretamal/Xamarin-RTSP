@@ -38,9 +38,9 @@ namespace Xamarin.Rtsp
                 
             }
 
-            var t = Task.Run(() => {
-                rtspClient.StartStreaming();
-            });
+            //var t = Task.Run(() => {
+            //    rtspClient.StartStreaming();
+            //});
             
         }
 

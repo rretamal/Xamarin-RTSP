@@ -7,6 +7,6 @@ namespace Xamarin.Rtsp.Renderers
 {
     public interface IRtspClient
     {
-        Task<bool> StartStreaming();
+        Task<bool> StartStreaming(ICustomView customView);
     }
 }
