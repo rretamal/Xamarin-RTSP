@@ -4,7 +4,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Com.Alexvas.Utils;
 using Java.Interop;
+using Java.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +28,14 @@ namespace Xamarin.Rtsp.Droid.Renderers
         private byte[] audioCodecConfig = null;
         VideoDecodeThread videoDecodeThread;
         Surface _surface;
+        int _width;
+        int _height;
 
-        public RtspListener()
+        public RtspListener(Surface surface, int width, int height)
         {
-            //_surface = surface;
+            _surface = surface;
+            _width = width;
+            _height = height;
         }
         //public IntPtr Handle => throw new NotImplementedException();
 
@@ -130,7 +136,8 @@ namespace Xamarin.Rtsp.Droid.Renderers
         {
             if (!string.IsNullOrWhiteSpace(videoMimeType))
             {
-                //videoDecodeThread = new VideoDecodeThread(_surface, videoMimeType, _);
+                videoDecodeThread = new VideoDecodeThread(_surface, videoMimeType, _width, _height, videoFrameQueue);
+                videoDecodeThread.Start();
             }
         }
     
@@ -154,6 +161,15 @@ namespace Xamarin.Rtsp.Droid.Renderers
 
         public void OnRtspVideoNalUnitReceived(byte[] data, int offset, int length, long timestamp)
         {
+            var nals = new List<VideoCodecUtils.NalUnit>();
+
+            var numNals = VideoCodecUtils.GetH264NalUnits(data, offset, length - 1, nals);
+
+            if (length > 0)
+            {
+                videoFrameQueue.Push(new Frame() { Data = data, Offset = offset, Lenght = length, Timestamp = timestamp});
+            }
+
         }
 
         public void SetJniIdentityHashCode(int value)

@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -16,10 +17,14 @@ using Xamarin.Rtsp.Renderers;
 [assembly: ExportRenderer(typeof(CameraView), typeof(CameraViewRenderer))]
 namespace Xamarin.Rtsp.Droid.Renderers
 {
-    public class CameraViewRenderer : ViewRenderer<CameraView, CustomView>
+    public class CameraViewRenderer : ViewRenderer<CameraView, SurfaceView>, ISurfaceHolderCallback
     {
-        CustomView mSurfaceView;
+        SurfaceView currentView;
+        Surface surface;
+        int width;
+        int height;
         Context _context;
+        RtspClient rtspClient;
 
         public CameraViewRenderer(Context context) : base(context)
         {
@@ -32,16 +37,33 @@ namespace Xamarin.Rtsp.Droid.Renderers
 
             if (e.OldElement == null)
             {
-                mSurfaceView = new CustomView(_context) {
+                currentView = new SurfaceView(_context) {
                     LayoutParameters =
                                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent)
                 };
+                currentView.Holder.AddCallback(this);
 
-                base.SetNativeControl(mSurfaceView);
+                base.SetNativeControl(currentView);
 
-                var rtspClient = DependencyService.Get<IRtspClient>();
-                rtspClient.StartStreaming(mSurfaceView);
+                rtspClient = new RtspClient();//DependencyService.Get<IRtspClient>();
+                //rtspClient.StartStreaming(mSurfaceView);
             }
+        }
+
+        public void SurfaceChanged(ISurfaceHolder holder, [GeneratedEnum] Format format, int width, int height)
+        {
+            if (rtspClient != null)
+            {
+                rtspClient.StartStreaming(currentView);
+            }
+        }
+
+        public void SurfaceCreated(ISurfaceHolder holder)
+        {
+        }
+
+        public void SurfaceDestroyed(ISurfaceHolder holder)
+        {
         }
     }
 }

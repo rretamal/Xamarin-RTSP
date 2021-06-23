@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Xamarin.Rtsp.Renderers
 {
-    public interface IRtspClient
+    public interface IRtspClient<T>
     {
-        Task<bool> StartStreaming(ICustomView customView);
+        Task<bool> StartStreaming(T customView);
     }
 }

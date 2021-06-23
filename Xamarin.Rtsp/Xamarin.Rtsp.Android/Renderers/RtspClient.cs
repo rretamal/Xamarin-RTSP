@@ -18,12 +18,12 @@ using Xamarin.Rtsp.Renderers;
 [assembly: Dependency(typeof(Xamarin.Rtsp.Droid.Renderers.RtspClient))]
 namespace Xamarin.Rtsp.Droid.Renderers
 {
-    public class RtspClient : IRtspClient
+    public class RtspClient : IRtspClient<SurfaceView>
     {
         Com.Alexvas.Rtsp.RtspClient localClient;
-        ICustomView _surfaceView;
+        SurfaceView _surfaceView;
 
-        public async Task<bool> StartStreaming(ICustomView surfaceView)
+        public async Task<bool> StartStreaming(SurfaceView surfaceView)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace Xamarin.Rtsp.Droid.Renderers
                 string uri = "rtsp://192.168.1.51:554/11";
                 int port = 554;
                 Java.Util.Concurrent.Atomic.AtomicBoolean rtspStopped = new Java.Util.Concurrent.Atomic.AtomicBoolean(false);
-                var listener = new RtspListener();
+                var listener = new RtspListener(surfaceView.Holder.Surface, surfaceView.Width, surfaceView.Height);
 
                 localClient = new Com.Alexvas.Rtsp.RtspClient.Builder(socket, uri, rtspStopped, listener)
                     .RequestVideo(true).RequestAudio(false).WithDebug(true).WithCredentials("admin", "ksec2021").Build();

@@ -13,13 +13,9 @@ namespace Xamarin.Rtsp
 {
     public partial class MainPage : ContentPage
     {
-        IRtspClient rtspClient;
-
         public MainPage()
         {
             InitializeComponent();
-
-            rtspClient = DependencyService.Get<IRtspClient>();
         }
 
         protected override void OnAppearing()

@@ -23,6 +23,7 @@ namespace Xamarin.Rtsp.Droid.Renderers.Decode
         public VideoDecodeThread(Surface surface,
             string mimeType, int width, int height, FrameQueue queue)
         {
+            _surface = surface;
             _mimeType = mimeType;
             _width = width;
             _height = height;

@@ -18,6 +18,8 @@ namespace Xamarin.Rtsp.Droid.Renderers
         public CustomView(Context context) : base(context)
         {
             this.SetLayerType(LayerType.Software, null);
+
+
         }
     }
 }
