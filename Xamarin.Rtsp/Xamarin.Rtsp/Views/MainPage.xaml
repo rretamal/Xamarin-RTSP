@@ -10,7 +10,7 @@
         <Frame BackgroundColor="#2196F3" Padding="5" CornerRadius="0">
             <Label Text="RTSP Demo" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Ctrls:CameraView x:Name="cameraView" BackgroundColor="LightGray" MinimumHeightRequest="100" MinimumWidthRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Ctrls:CameraView>
+        <Ctrls:CameraView x:Name="cameraView" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Ctrls:CameraView>
     </StackLayout>
 
 </ContentPage>

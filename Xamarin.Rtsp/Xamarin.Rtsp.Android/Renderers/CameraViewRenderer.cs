@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Rtsp.Droid.Renderers;
@@ -52,14 +53,18 @@ namespace Xamarin.Rtsp.Droid.Renderers
 
         public void SurfaceChanged(ISurfaceHolder holder, [GeneratedEnum] Format format, int width, int height)
         {
-            if (rtspClient != null)
-            {
-                rtspClient.StartStreaming(currentView);
-            }
+            
         }
 
         public void SurfaceCreated(ISurfaceHolder holder)
         {
+            if (rtspClient != null)
+            {
+                Task.Run(async () =>
+                {
+                    rtspClient.StartStreaming(currentView);
+                });
+            }
         }
 
         public void SurfaceDestroyed(ISurfaceHolder holder)
