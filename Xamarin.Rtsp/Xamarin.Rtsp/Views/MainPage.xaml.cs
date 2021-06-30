@@ -7,37 +7,28 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Rtsp.Renderers;
+using Xamarin.Rtsp.Services;
+using Xamarin.Rtsp.ViewModels;
 using Xamarin.Rtsp.Views;
 
 namespace Xamarin.Rtsp
 {
     public partial class MainPage : ContentPage
     {
+        MainViewModel viewModel => BindingContext as MainViewModel;
+
         public MainPage()
         {
             InitializeComponent();
+
+            BindingContext = new MainViewModel(DependencyService.Get<INavService>());
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (Preferences.Get("cameraUrl", "") != "")
-            {
-                var cameraUrl = Preferences.Get("cameraUrl", "");
-                var cameraPort = Preferences.Get("cameraPort", "");
-                var cameraUser = Preferences.Get("cameraUser", "");
-                var cameraPwd = Preferences.Get("cameraPassword", "");
-                var cameraVideo = Preferences.Get("cameraVideo", "");
-                var cameraAudio = Preferences.Get("cameraAudio", "");
-
-                
-            }
-
-            //var t = Task.Run(() => {
-            //    rtspClient.StartStreaming();
-            //});
-            
+            viewModel?.Init();
         }
 
         void New_Clicked(object sender, EventArgs e)

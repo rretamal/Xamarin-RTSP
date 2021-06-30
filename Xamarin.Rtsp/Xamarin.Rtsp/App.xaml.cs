@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Rtsp.Services;
+using Xamarin.Rtsp.ViewModels;
 
 namespace Xamarin.Rtsp
 {
@@ -10,7 +12,11 @@ namespace Xamarin.Rtsp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            var mainPage = new NavigationPage(new MainPage());
+            var navService = DependencyService.Get<INavService>() as XamarinFormsNavService;
+            navService.XamarinFormsNav = mainPage.Navigation;
+
+            navService.RegisterViewMapping(typeof(MainViewModel), typeof(MainPage));
         }
 
         protected override void OnStart()

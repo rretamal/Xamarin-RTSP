@@ -4,7 +4,7 @@
              xmlns:Ctrls="clr-namespace:Xamarin.Rtsp.Renderers"
              x:Class="Xamarin.Rtsp.MainPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Agregar Cámara" Clicked="New_Clicked"/>
+        <ToolbarItem Text="Agregar Cámara" Command="{Binding NewCommand}"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
         <Frame BackgroundColor="#2196F3" Padding="5" CornerRadius="0">
