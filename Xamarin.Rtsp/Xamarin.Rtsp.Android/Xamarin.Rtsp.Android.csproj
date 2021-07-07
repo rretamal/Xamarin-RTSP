@@ -54,6 +54,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.7.335</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
@@ -64,6 +67,7 @@
     <Compile Include="Renderers\CustomRenderer .cs" />
     <Compile Include="Renderers\Decode\FrameQueue.cs" />
     <Compile Include="Renderers\Decode\VideoDecodeThread.cs" />
+    <Compile Include="Renderers\FileHelper.cs" />
     <Compile Include="Renderers\RtspClient.cs" />
     <Compile Include="Renderers\RtspListener.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

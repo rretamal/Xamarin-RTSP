@@ -10,7 +10,29 @@
         <Frame BackgroundColor="#2196F3" Padding="5" CornerRadius="0">
             <Label Text="RTSP Demo" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Ctrls:CameraView x:Name="cameraView" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Ctrls:CameraView>
+        <CollectionView x:Name="cameras" SelectionMode="Single" ItemsSource="{Binding CameraEntries}" Margin="10,0,10,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="LightBlue" CornerRadius="10" Margin="10,0,10,0">
+                        <Grid Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2.*"></ColumnDefinition>
+                                <ColumnDefinition Width="8.*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Button Grid.Column="0" Grid.RowSpan="2"  WidthRequest="80" HeightRequest="80" CornerRadius="40" VerticalOptions="Center" HorizontalOptions ="Center" BackgroundColor="#F77DF9"/>
+                            <StackLayout Grid.Column="1" Grid.RowSpan="2">
+                                <Label Text="{Binding Name}" FontAttributes="Bold"></Label>
+                                <Label Text="{Binding Domain}"></Label>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
 
 </ContentPage>
