@@ -4,13 +4,13 @@
              xmlns:Ctrls="clr-namespace:Xamarin.Rtsp.Renderers"
              x:Class="Xamarin.Rtsp.MainPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Agregar Cámara" Command="{Binding NewCommand}"/>
+        <ToolbarItem Text="Agregar Cámara" Clicked="New_Clicked"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
         <Frame BackgroundColor="#2196F3" Padding="5" CornerRadius="0">
             <Label Text="RTSP Demo" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <CollectionView x:Name="cameras" SelectionMode="Single" ItemsSource="{Binding CameraEntries}" Margin="10,0,10,0">
+        <CollectionView x:Name="cameras" SelectionMode="Single" ItemsSource="{Binding CameraEntries}" Margin="10,0,10,0" SelectionChanged="cameras_SelectionChanged">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="LightBlue" CornerRadius="10" Margin="10,0,10,0">

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Rtsp.Models;
 using Xamarin.Rtsp.Renderers;
 using Xamarin.Rtsp.Services;
 using Xamarin.Rtsp.ViewModels;
@@ -36,5 +37,16 @@ namespace Xamarin.Rtsp
             Navigation.PushAsync(new NewCameraPage());
         }
 
+        private async void cameras_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var camera = (CameraEntry)e.CurrentSelection.FirstOrDefault();
+
+            if (camera != null)
+            {
+                await Navigation.PushAsync(new CameraViewPage(camera));
+            }
+
+            cameras.SelectedItem = null;
+        }
     }
 }

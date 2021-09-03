@@ -23,20 +23,25 @@ namespace Xamarin.Rtsp.Droid.Renderers
         Com.Alexvas.Rtsp.RtspClient localClient;
         SurfaceView _surfaceView;
 
+        public string Url { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+
         public async Task<bool> StartStreaming(SurfaceView surfaceView)
         {
             try
             {
                 _surfaceView = surfaceView;
 
-                var socket = await NetUtils.CreateSocketAndConnect("192.168.1.51", 554, 5000);
-                string uri = "rtsp://192.168.1.51:554/11";
-                int port = 554;
+                Uri uri = new Uri(this.Url);
+
+                var socket = await NetUtils.CreateSocketAndConnect(uri.Host, 554, 5000);
+                int port = uri.Port;
                 Java.Util.Concurrent.Atomic.AtomicBoolean rtspStopped = new Java.Util.Concurrent.Atomic.AtomicBoolean(false);
                 var listener = new RtspListener(surfaceView.Holder.Surface, surfaceView.Width, surfaceView.Height);
 
-                localClient = new Com.Alexvas.Rtsp.RtspClient.Builder(socket, uri, rtspStopped, listener)
-                    .RequestVideo(true).RequestAudio(false).WithDebug(true).WithCredentials("admin", "ksec2021").Build();
+                localClient = new Com.Alexvas.Rtsp.RtspClient.Builder(socket, this.Url, rtspStopped, listener)
+                    .RequestVideo(true).RequestAudio(false).WithDebug(true).WithCredentials(this.Username, this.Password).Build();
                 localClient.Execute();
 
                 NetUtils.CloseSocket(socket);

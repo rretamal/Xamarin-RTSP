@@ -47,6 +47,13 @@ namespace Xamarin.Rtsp.Droid.Renderers
                 base.SetNativeControl(currentView);
 
                 rtspClient = new RtspClient();//DependencyService.Get<IRtspClient>();
+
+                if (e.NewElement != null)
+                {
+                    rtspClient.Url = e.NewElement.Url ?? "";
+                    rtspClient.Username = e.NewElement.User ?? "";
+                    rtspClient.Password = e.NewElement.Password ?? "";
+                }
                 //rtspClient.StartStreaming(mSurfaceView);
             }
         }

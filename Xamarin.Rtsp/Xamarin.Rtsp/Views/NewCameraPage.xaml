@@ -9,8 +9,8 @@
         <TableView Intent="Form">
             <TableView.Root>
                 <TableSection>
+                    <EntryCell x:Name="cameraName" Label="Nombre:" />
                     <EntryCell x:Name="cameraUrl" Label="URL:" />
-                    <EntryCell x:Name="cameraPort" Label="Puerto:" Keyboard="Numeric" />
                     <EntryCell x:Name="cameraUser" Label="User:"/>
                     <EntryCell x:Name="cameraPassword" Label="Password:"/>
                     <SwitchCell x:Name="cameraVideo" Text="Habilitar Video" On="True" />

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Xamarin.Rtsp.Data
 {
-    public class Camera
+    public class Camera : BaseEntity
     {
         public string Name { get; set; }
         public string Url { get; set; }
